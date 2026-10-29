@@ -1,0 +1,13 @@
+.gradle/
+build/
+app/build/
+airplay/build/
+companion/build/
+.cxx/
+airplay/.cxx/
+.kotlin/
+.claude/
+local.properties
+.idea/
+*.iml
+.DS_Store

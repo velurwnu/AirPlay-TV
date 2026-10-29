@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp" android:height="180dp"
+    android:viewportWidth="320" android:viewportHeight="180">
+    <path android:pathData="M0,0h320v180h-320z">
+        <aapt:attr xmlns:aapt="http://schemas.android.com/aapt" name="android:fillColor">
+            <gradient android:type="linear" android:startX="0" android:startY="0"
+                android:endX="320" android:endY="180"
+                android:startColor="#FF1C1C1E" android:endColor="#FF3A3A3C" />
+        </aapt:attr>
+    </path>
+    <!-- AirPlay: screen with a triangle under it -->
+    <path android:fillColor="#00000000" android:strokeColor="#FFFFFFFF" android:strokeWidth="7"
+        android:strokeLineJoin="round"
+        android:pathData="M132,118h-14a8,8 0,0 1,-8 -8v-52a8,8 0,0 1,8 -8h84a8,8 0,0 1,8 8v52a8,8 0,0 1,-8 8h-14" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M160,104l26,30h-52z" />
+</vector>

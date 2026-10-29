@@ -1,0 +1,159 @@
+/* ------------------------------------------------------------------
+   TV theme for music.apple.com — as light as it gets.
+   Flat colours, no blur, no shadows, no gradients, no animations,
+   no motion artwork. Only text, covers and a clear focus ring.
+   Everything is scoped under html.tv (added by tv.js).
+   ------------------------------------------------------------------ */
+html.tv {
+  --tv-accent: #fa2d48;
+  --tv-panel: #1c1c1f;
+  --tv-ring: #fff;
+  --tv-bar-h: 64px;
+  --tv-gutter: 40px;
+  --bodyGutter: var(--tv-gutter);
+  color-scheme: dark;
+  background: #000 !important;
+}
+html.tv body, html.tv .scrollable-page { background: #000 !important; }
+
+/* ---------- Performance: switch off everything expensive ---------- */
+html.tv *, html.tv *::before, html.tv *::after {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  /* Near-zero instead of none: the site waits for transitionend/animationend in places. */
+  transition-duration: 1ms !important;
+  transition-delay: 0s !important;
+  animation-duration: 1ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+}
+html.tv .shelf-grid__list {
+  -webkit-mask: none !important; mask: none !important;
+  scroll-snap-type: none !important;
+}
+/* Blurred artwork glows and moving editorial video */
+html.tv [class*="radiosity"],
+html.tv amp-ambient-video,
+html.tv .scrollable-page video { display: none !important; }
+
+/* ---------- Hide the desktop chrome we replace ---------- */
+html.tv, html.tv body, html.tv .app-container, html.tv .scrollable-page { --web-navigation-width: 0px !important; }
+html.tv .app-container {
+  grid-template-areas: "structure-main-section" !important;
+  grid-template-columns: minmax(0,1fr) !important;
+  grid-template-rows: minmax(0,1fr) !important;
+}
+html.tv [data-testid="header"],
+html.tv [data-testid="navigation"],
+html.tv [data-testid="footer"],
+html.tv [data-testid="upsell-personal"],
+html.tv .banner-container,
+html.tv .upsell-banner,
+html.tv [data-testid="native-cta"],
+html.tv .locale-switcher-modal-container,
+html.tv .navigation-item__radio,
+html.tv .shelf-grid-nav__arrow,
+html.tv .see-all-button { display: none !important; }
+
+/* Content starts under our tab bar and ends above the player */
+html.tv .scrollable-page {
+  margin-top: 0 !important;
+  padding-top: calc(var(--tv-bar-h) + 12px) !important;
+  padding-bottom: 100px !important;
+  scrollbar-width: none;
+  scroll-padding-top: calc(var(--tv-bar-h) + 30px);
+  scroll-padding-bottom: 110px;
+}
+html.tv .scrollable-page::-webkit-scrollbar { display: none; }
+html.tv .player-bar.tv-empty { display: none !important; }
+
+/* ---------- Tab bar: a plain strip ---------- */
+#tv-bar {
+  position: fixed; z-index: 2147483000; top: 0; left: 0; right: 0; height: var(--tv-bar-h);
+  display: flex; justify-content: center; align-items: center; gap: 24px;
+  background: #000;
+  font: 600 17px/1.2 -apple-system, "SF Pro Text", Roboto, "Helvetica Neue", sans-serif;
+  color: #fff;
+}
+#tv-bar [hidden] { display: none !important; }
+html.tv.tv-scrolled #tv-bar:not(:focus-within) { display: none; }
+#tv-bar .tv-pill { display: flex; gap: 4px; }
+#tv-bar button {
+  font: inherit; color: #999; background: none; border: 0; outline: none; cursor: pointer;
+  padding: 8px 18px; border-radius: 8px; white-space: nowrap;
+}
+#tv-bar button.active { color: #fff; }
+#tv-bar button.tv-focus, #tv-bar button:focus { color: #000; background: #fff; }
+#tv-bar .tv-sub button { padding: 6px 14px; font-size: 15px; }
+#tv-bar .tv-signin { color: #fff; background: var(--tv-accent); }
+
+/* ---------- Home: play / shuffle the whole library ---------- */
+#tv-hero {
+  margin: 4px var(--tv-gutter) 20px; padding: 16px 20px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  background: var(--tv-panel); color: #fff;
+  font-family: -apple-system, "SF Pro Display", Roboto, sans-serif;
+}
+#tv-hero h1 { font-size: 26px; font-weight: 700; margin: 0; }
+#tv-hero p { margin: 4px 0 0; color: #999; font-size: 15px; }
+#tv-hero .tv-actions { display: flex; gap: 12px; }
+#tv-hero button {
+  font: 600 16px/1 inherit; color: #fff; background: #333; border: 0;
+  border-radius: 8px; padding: 12px 22px; cursor: pointer; outline: none;
+}
+#tv-hero button.tv-focus, #tv-hero button:focus { background: #fff; color: #000; }
+html.tv .content-container { display: flex; flex-direction: column; }
+html.tv .content-container > #tv-hero { order: -10; }
+html.tv .content-container > .tv-pin-0 { order: -9; }
+html.tv .content-container > .tv-pin-1 { order: -8; }
+
+/* ---------- Focus (D-pad): one plain white ring ---------- */
+html.tv a:focus, html.tv button:focus, html.tv [tabindex]:focus, html.tv input:focus { outline: none !important; }
+html.tv .tv-focus { outline: 3px solid var(--tv-ring) !important; outline-offset: 2px !important; border-radius: 8px; }
+html.tv .product-lockup .tv-focus, html.tv .product-lockup.tv-focus { outline: none !important; }
+html.tv .product-lockup:has(.tv-focus) .product-lockup__artwork,
+html.tv .product-lockup.tv-focus-within .product-lockup__artwork { outline: 4px solid var(--tv-ring); outline-offset: 2px; border-radius: 8px; }
+html.tv .shelf-grid__list { overflow-y: visible !important; padding-top: 8px !important; padding-bottom: 12px !important; }
+html.tv .tv-row.tv-focus { outline: none !important; background: #fff !important; color: #000 !important; }
+html.tv .tv-row.tv-focus * { color: #000 !important; }
+html.tv .player-bar button.tv-focus,
+html.tv .primary-actions button.tv-focus { outline: none !important; background: #fff !important; color: #000 !important; border-radius: 8px; }
+html.tv .player-bar button.tv-focus svg, html.tv .primary-actions button.tv-focus svg { fill: #000 !important; }
+
+/* ---------- Player: the site's own controls on a solid strip ---------- */
+html.tv .player-bar {
+  position: fixed !important; margin: 0 !important; padding: 0 !important;
+  left: 0 !important; right: 0 !important; width: auto !important; bottom: 0 !important;
+  background: var(--tv-panel) !important; border: 0 !important;
+  z-index: 2147482000 !important;
+}
+html.tv .chrome-player { margin: 0 auto; background: none !important; }
+html.tv .chrome-player::before, html.tv .chrome-player::after { display: none !important; }
+
+/* ---------- Lyrics: big readable text on plain black ---------- */
+html.tv .lyrics__container {
+  background: #000 !important;
+  --lyrics-line-color: #777;
+  --lyrics-line-color-current: #fff;
+  --lyrics-current-line-scale: 1;
+  --lyrics-line-font-size: 36px !important;
+  --lyrics-linear-gradient: none;
+}
+html.tv .lyrics__artwork-container img { filter: none !important; }
+/* Our strip and the player would cover the full-screen lyrics */
+html.tv:has(.lyrics__container) #tv-bar,
+html.tv:has(.lyrics__container) .player-bar { display: none !important; }
+
+/* ---------- Apple ID sign-in sheet open: our chrome steps aside ---------- */
+html.tv.tv-modal #tv-bar, html.tv.tv-modal .player-bar, html.tv.tv-modal #tv-toast { display: none !important; }
+
+/* ---------- Toast ---------- */
+#tv-toast {
+  position: fixed; z-index: 2147483001; left: 50%; bottom: 90px; transform: translateX(-50%);
+  padding: 10px 22px; border-radius: 8px; color: #fff; background: #333;
+  font: 600 16px/1.2 -apple-system, Roboto, sans-serif;
+}
+#tv-toast[hidden] { display: none; }

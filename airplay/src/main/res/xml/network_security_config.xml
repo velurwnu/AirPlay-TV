@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Plain HTTP is needed for: the iPhone's remote-control service on the local network,
+     the local HLS server of the AirPlay core (http://localhost), and http video links sent by apps. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>
