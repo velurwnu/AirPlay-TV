@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="banner.png" width="320" alt="AirPlay TV Banner">
+
 # AirPlay TV & Music TV for Android TV
 
 **English** | [Русский](#airplay-tv-ru)
